@@ -5,24 +5,38 @@ interface AbstractFactory{
     Phone createPhone(String param);
     Mask createMasks(String param);
 }
-interface Phone{}
-class IPhone implements Phone{}
 
-interface Mask{}
-class N95Mask implements Mask{}
+//具体手机  口罩的用途
+interface Phone{
+    public void print();
+}
+class IPhone implements Phone{
+    @Override
+    public void print() {
+        System.out.println("This is an iphone");
+    }
+}
 
-//具体工厂
+interface Mask{
+    public void wear();
+}
+class N95Mask implements Mask{
+    @Override
+    public void wear() {
+        System.out.println("wear the mask");
+    }
+}
+
+//具体工厂，工厂只是用来生产的
 class SuperFactory implements AbstractFactory{
 
     @Override
     public Phone createPhone(String param) {
-        System.out.println(param+"iphone");
         return new IPhone();
     }
 
     @Override
     public Mask createMasks(String param) {
-        System.out.println(param+"口罩");
         return new N95Mask();
     }
 }
@@ -30,10 +44,8 @@ class SuperFactory implements AbstractFactory{
 public class AbstractFactoryDemo {
     public static void main(String[] args) {
         AbstractFactory factory = new SuperFactory();
-        factory.createMasks("");
-        SuperFactory superFactory = new SuperFactory();
-        superFactory.createMasks("n95");
-        superFactory.createPhone("iphoneX");
+        Phone phone = factory.createPhone("");
+        phone.print();
     }
 
 }
