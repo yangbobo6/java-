@@ -91,15 +91,25 @@ public class ClassLoaderTest {
 
         //创建两个不同的自定义类加载器实例
         String rootDir = "D:\\JAVA学习\\java-\\JVM\\src";
-        FileClassLoader loader2 = new FileClassLoader(rootDir);
-        FileClassLoader loader3 = new FileClassLoader(rootDir);
+        //FileClassLoader loader2 = new FileClassLoader(rootDir);
+        //FileClassLoader loader3 = new FileClassLoader(rootDir);
         //通过findClass创建类的class对象
-        Class<?> object1 = loader2.findClass("classloader.ClassLoaderTest");
-        Class<?> object2 = loader3.findClass("classloader.ClassLoaderTest");
+        //Class<?> object1 = loader2.findClass("classloader.ClassLoaderTest");
+        //Class<?> object2 = loader3.findClass("classloader.ClassLoaderTest");
 
-        System.out.println("1"+object1.hashCode());
-        System.out.println("2"+object2.hashCode());
+        //System.out.println("1"+object1.hashCode());
+        //System.out.println("2"+object2.hashCode());
 
+        //创建自定义类加载器 FileClassLoader
+        FileClassLoader loader = new FileClassLoader(rootDir);
+        try {
+            //加载指定的class文件
+            Class<?> object1 = loader.loadClass("classLoader.DemoObj2");
+            System.out.println(object1.getDeclaredConstructor().newInstance().toString());
 
+            //输出结果 ： i am DemoObj
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
