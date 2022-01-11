@@ -51,6 +51,7 @@ public class SimpleFactory {
         //简单工厂模式  改造
         Restaurant restaurant = Waiter.getMenu(1);
         restaurant.cook();
+        Waiter.getMenu(2).cook();
 
     }
 }
