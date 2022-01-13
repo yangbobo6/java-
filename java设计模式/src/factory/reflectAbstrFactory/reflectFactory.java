@@ -51,14 +51,13 @@ public class reflectFactory {
     public static void main(String[] args) {
         // 1. 通过调用工厂类的静态方法（反射原理），从而动态创建产品类实例
         // 需传入完整的类名 & 包名
-        //Product concreteProduct = Factory.getInstance("factory.reflectAbstrFactory.ProductA");
+        Product concreteProduct = Factory.getInstance("factory.reflectAbstrFactory.ProductB");
 
         //调用该产品类对象的方法，从而生产产品
-        //concreteProduct.show();
+        concreteProduct.show();
 
         //1. 读取属性配置文件
-        Properties pro = new Properties();
-        
+
     }
 
 }
