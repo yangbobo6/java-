@@ -9,6 +9,17 @@ import java.util.List;
  * Director-->Builder-->ConcreteBuilder-->Product
  * 例子：
  */
+
+//电脑城老板委派任务给装机人员（Director）
+class Director{
+    //指挥装机人员组装电脑
+    public void Construct(Builder builder){
+        builder.BuilderCPU();
+        builder.BuildMainBoard();
+        builder.BuildHD();
+    }
+}
+
 //定义builder，组装电脑的过程，声明抽象方法，具体由子类实现
 abstract class Builder{
     //第一步：装CPU
@@ -20,16 +31,6 @@ abstract class Builder{
     public abstract void BuildHD();
     //返回产品的方法：获得组装好的电脑
     public abstract Computer GetComputer();
-}
-
-//电脑城老板委派任务给装机人员（Director）
-class Director{
-    //指挥装机人员组装电脑
-    public void Construct(Builder builder){
-        builder.BuilderCPU();
-        builder.BuildMainBoard();
-        builder.BuildHD();
-    }
 }
 //创建具体的建造者（ConcreteBuilder）:装机人员
 class ConcreteBuilder extends Builder{
