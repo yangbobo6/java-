@@ -24,7 +24,7 @@ public class NIOServer {
         while (true){
             //没有事件发生,不会堵塞到这里
             if(selector.select(1000)==0){
-                System.out.println("服务器等待了1s，无连接");
+                //System.out.println("服务器等待了1s，无连接");
                 continue;
             }
             //如果返回的不是0 ，说明有连接,获取到相关的selectionKeys集合
