@@ -12,6 +12,7 @@ public class NIOServer {
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
         //创建selector对象
         Selector selector = Selector.open();
+        System.out.println(selector.hashCode());
 
         //绑定一个端口号
         serverSocketChannel.socket().bind(new InetSocketAddress(6666));
@@ -28,7 +29,7 @@ public class NIOServer {
                 continue;
             }
             //如果返回的不是0 ，说明有连接,获取到相关的selectionKeys集合
-            //表示已经获取到关注的事件，通过selectKeys返回集合，再通过kes反向获取通道
+            //表示已经获取到关注的事件，通过selectKeys返回集合，再通过keys反向获取通道
             Set<SelectionKey> selectionKeys = selector.selectedKeys();
             //遍历keys
             Iterator<SelectionKey> keyIterator = selectionKeys.iterator();
@@ -53,6 +54,8 @@ public class NIOServer {
                     //获取到channel关联的buffer
                     ByteBuffer buffer = (ByteBuffer)key.attachment();
                     channel.read(buffer);
+                    System.out.println(buffer.array());
+                    System.out.println(new String(buffer.array()));
                     System.out.println("from 客户端"+new String(buffer.array()));
                 }
                 //手动从集合中删除key，防止重复操作

@@ -21,8 +21,10 @@ public class GroupChatClient {
     //构造器
     public GroupChatClient() throws IOException {
         selector = Selector.open();
+        System.out.println(selector.hashCode());
         //定义连接器   ------------------问题？？
         socketChannel = SocketChannel.open(new InetSocketAddress(HOST,PORT));
+        System.out.println(socketChannel.hashCode());
         socketChannel.configureBlocking(false);
         //将channel注册到selector
         socketChannel.register(selector, SelectionKey.OP_READ);
@@ -46,6 +48,7 @@ public class GroupChatClient {
         try {
             //查看选择器中 哪个通道 有信息返回  阻塞在这里了（如果有别的工作要做，在else里面具体设置）
             int readChannels = selector.select();
+            System.out.println(readChannels);
             if(readChannels>0){ //有可用的通道
                 Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
                 while (iterator.hasNext()){
@@ -57,7 +60,7 @@ public class GroupChatClient {
                     channel.read(buffer);
                     //缓冲区转换成字符串
                     String msg = new String(buffer.array());
-                    System.out.println(msg.trim());
+                    System.out.println(msg.trim()+"  读取到别人发的channel"+channel.hashCode());
                 }
                 iterator.remove();
             }else {

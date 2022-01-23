@@ -23,6 +23,7 @@ public class GroupChatServer {
         try {
             //得到选择器  和监听channel
             selector = Selector.open();
+            System.out.println(selector.hashCode());
             listenChannel = ServerSocketChannel.open();
             //绑定端口号
             listenChannel.socket().bind(new InetSocketAddress(PORT));
@@ -59,7 +60,7 @@ public class GroupChatServer {
                             //将sc注册到selector里面
                             sc.register(selector,SelectionKey.OP_READ);
                             //提示
-                            System.out.println(sc.getRemoteAddress()+"上线");
+                            System.out.println(sc.getRemoteAddress()+"上线"+"   listenChannel连接通道是"+sc.hashCode());
                         }
 
                         if(key.isReadable()){ //发送的是read事件，  通道是可读状态
@@ -95,7 +96,7 @@ public class GroupChatServer {
                 String msg = new String(buffer.array());
 
                 //输出该消息
-                System.out.println("from 客户端"+msg+"--结束");
+                System.out.println("from 客户端"+msg+"  读取客户端通道readChannel"+channel.hashCode());
 
                 //向其他客户端转发消息(排除自己)，专门写一个方法来执行
                 sendInfoToOtherClient(msg,channel);
