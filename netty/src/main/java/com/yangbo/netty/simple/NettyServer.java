@@ -11,6 +11,8 @@ import java.io.IOException;
 public class NettyServer{
     public static void main(String[] args) throws Exception {
         //创建bossGroup（处理链接请求）和workerGroup（客户端业务处理）
+        //bossGroup和workerGroup含有的子线程（NioEventGroup）个数
+        //默认是cpu核数*2    8
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
 
