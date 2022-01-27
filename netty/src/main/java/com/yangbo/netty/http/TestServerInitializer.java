@@ -20,7 +20,7 @@ public class TestServerInitializer extends ChannelInitializer<SocketChannel> {
         //1. HttpServerCodec 是netty 提供的处理http的 编-解码器
         pipeline.addLast("MyHttpServerCodec",new HttpServerCodec());
         //2. 增加一个自定义的handler
-        pipeline.addLast("MyTestServerInitializer",new TestServerInitializer());
+        pipeline.addLast("MyTestHttpServerHandler",new TestHttpServerHandler());
 
         System.out.println("ok ~~~");
     }

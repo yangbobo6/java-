@@ -45,7 +45,7 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
 
             ByteBuf content = Unpooled.copiedBuffer("hello, 我是服务器", CharsetUtil.UTF_8);
 
-            //构造一个http的相应，即 httpresponse
+            //构造一个http的相应，即 httpResponse
             FullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, content);
 
             response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/plain");
