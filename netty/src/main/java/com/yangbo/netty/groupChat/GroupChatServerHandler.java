@@ -9,15 +9,20 @@ import io.netty.util.concurrent.GlobalEventExecutor;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GroupChatServerHandler extends SimpleChannelInboundHandler<String > {
     //定义一个channel组，管理所有的channel
     private static ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
+    //
+    public static Map<String ,Channel> channels = new HashMap<>();
+
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 
-    //handlerAdded 表示连接建立，第一个被执行
+    //handlerAdded 表示连接建立，handlerAdded方法第一个被执行
     //将当前channel加入到channelGroup
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
@@ -26,6 +31,8 @@ public class GroupChatServerHandler extends SimpleChannelInboundHandler<String >
         //该方法会遍历所有的channel，并发送消息
         channelGroup.writeAndFlush("[客户端]"+channel.remoteAddress()+" 加入聊天"+sdf.format(new Date())+"/n");
         channelGroup.add(channel);
+
+        channels.put("id1000",channel);
     }
 
     //断开连接，将xx客户离开的信息推送给当前在线的客户
