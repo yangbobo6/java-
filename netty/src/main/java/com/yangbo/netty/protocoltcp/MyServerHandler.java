@@ -3,6 +3,7 @@ package com.yangbo.netty.protocoltcp;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
@@ -19,7 +20,7 @@ public class MyServerHandler extends SimpleChannelInboundHandler<MessageProtocol
         int len = msg.getLen();
         byte[] content = msg.getContent();
 
-        System.out.println("服务器接收："+ "长度= "+len+"  内容"+content);
+        System.out.println("服务器接收："+ "长度= "+len+" || 内容= "+new String(content, Charset.forName("utf-8")));
 
         //回复消息
         System.out.println("服务器回复消息");
