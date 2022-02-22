@@ -9,6 +9,10 @@ public class Client {
         Host host = new Host();
         Proxy proxy = new Proxy(host);
         proxy.rent();
+
+
+//        Rent proxy1 = new Proxy();
+//        proxy1.rent();
     }
 
 }

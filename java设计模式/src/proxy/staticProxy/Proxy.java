@@ -6,9 +6,16 @@ package proxy.staticProxy;
  */
 public class Proxy implements Rent{
     private Host host;
+    //private Host host1 = new Host();
+    public Proxy(){};
+
+    public Proxy(Host host) {
+        this.host = host;
+    }
 
     @Override
     public void rent() {
+        //host1.rent();
         host.rent();
         seeHouse();
         fee();
@@ -20,10 +27,6 @@ public class Proxy implements Rent{
 
     private void seeHouse() {
         System.out.println("看房子");
-    }
-
-    public Proxy(Host host) {
-        this.host = host;
     }
 
 

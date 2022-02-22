@@ -16,12 +16,27 @@ public class ProxyInvocationHandler implements InvocationHandler {
 
     //生成代理类，重点是第二个参数，获取要代理的抽象角色！之前都是一个角色，现在可以代理一类角色
     public Object getProxy(){
+        /**
+         * loader :类加载器，用于加载代理对象。
+         * interfaces : 被代理类实现的一些接口；
+         * h : 实现了 InvocationHandler 接口的对象；
+         */
         return Proxy.newProxyInstance(this.getClass().getClassLoader(),
                 rent.getClass().getInterfaces(),this);
     }
 
-    // proxy : 代理类 method : 代理类的调用处理程序的方法对象.
-    // 处理代理实例上的方法调用并返回结果
+    /**
+     *
+     * @param proxy   动态生成的代理类
+     * @param method  与代理类对象调用的方法相对应
+     * @param args    当前 method 方法的参数
+     * @return
+     * @throws Throwable
+     *
+     *通过Proxy 类的 newProxyInstance() 创建的代理对象在调用方法的时候，
+     * 实际会调用到实现InvocationHandler 接口的类的 invoke()方法。
+     * 你可以在 invoke() 方法中自定义处理逻辑
+     */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         seeHouse();

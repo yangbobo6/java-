@@ -5,7 +5,7 @@ package proxy.sendMessage;
  * @Date: 2022-02-21-21:48
  * @Description:
  */
-public class SmsProxy {
+public class SmsProxy implements SmsService{
 
     private final SmsService smsService;
 
@@ -14,4 +14,12 @@ public class SmsProxy {
     }
 
 
+    @Override
+    public String send(String message) {
+
+        System.out.println("before ...");
+        smsService.send(message);
+        System.out.println("after ....");
+        return null;
+    }
 }
