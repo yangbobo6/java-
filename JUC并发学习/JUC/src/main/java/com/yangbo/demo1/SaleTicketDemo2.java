@@ -40,7 +40,7 @@ class Ticket2{
     Lock lock = new ReentrantLock();
 
     //卖票的方式
-    public synchronized void sale(){
+    public void sale(){
         //锁的使用   加锁，然后再finally中解锁
         lock.lock();
 
