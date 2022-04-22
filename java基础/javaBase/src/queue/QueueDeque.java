@@ -1,9 +1,8 @@
 package queue;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @Author: yangbo
@@ -20,6 +19,7 @@ public class QueueDeque {
         
         queue.remove();
         
+        AtomicInteger integer = new AtomicInteger(1);
         
     }
 }
