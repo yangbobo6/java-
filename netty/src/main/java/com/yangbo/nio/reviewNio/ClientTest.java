@@ -14,8 +14,6 @@ import java.util.concurrent.TimeUnit;
 public class ClientTest {
 
     public static void client(){
-        //创建buffer
-        ByteBuffer buffer = ByteBuffer.allocate(1024);
         SocketChannel socketChannel = null;
         try{
             socketChannel = SocketChannel.open();
@@ -26,13 +24,8 @@ public class ClientTest {
                 while(true){
                     TimeUnit.SECONDS.sleep(1);
                     String info = "this is "+i++ +"-th information from client";
-                    buffer.clear();
-                    buffer.put(info.getBytes());
-                    buffer.flip();
-                    while(buffer.hasRemaining()){
-                        System.out.println(buffer);
-                        socketChannel.write(buffer);
-                    }
+                    ByteBuffer buffer = ByteBuffer.wrap(info.getBytes());
+                    socketChannel.write(buffer);
                 }
             }
         }catch (Exception e){
@@ -47,6 +40,10 @@ public class ClientTest {
             }
         }
         
+    }
+
+    public static void main(String[] args) {
+        ClientTest.client();
     }
     
     

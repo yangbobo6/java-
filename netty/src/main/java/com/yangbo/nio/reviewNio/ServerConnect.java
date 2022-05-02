@@ -34,15 +34,22 @@ public class ServerConnect {
     public static void handleRead(SelectionKey key) throws IOException{
         SocketChannel sc = (SocketChannel)key.channel();
         ByteBuffer buffer = (ByteBuffer)key.attachment();
-        long byteRead = sc.read(buffer);
+        //ByteBuffer buffer = ByteBuffer.allocate(1024);
+        int byteRead = sc.read(buffer);
         while(byteRead>0){
-            buffer.flip();
-            while (buffer.hasRemaining()){
-                System.out.println((char)buffer.get() );
-            }
-            System.out.println();
+            //buffer.flip();
+           
+            System.out.println( buffer.array());
             buffer.clear();
             byteRead = sc.read(buffer);
+//            buffer.flip();
+//            while (buffer.hasRemaining()) {
+//                System.out.print((char) buffer.get());
+//            }
+//            System.out.println();
+//            buffer.clear();
+//            byteRead = sc.read(buffer);
+            
         }
         if(byteRead==-1){
             sc.close();
@@ -60,11 +67,14 @@ public class ServerConnect {
     }
     
     public static void selector(){
+        //选择器
         Selector selector = null;
+        //服务端channel
         ServerSocketChannel ssc = null;
         try{
             selector = Selector.open();
             ssc = ServerSocketChannel.open();
+            //绑定到端口
             ssc.socket().bind(new InetSocketAddress(PORT));
             ssc.configureBlocking(false);
             ssc.register(selector,SelectionKey.OP_ACCEPT);
@@ -91,7 +101,6 @@ public class ServerConnect {
                     iter.remove();
                 }
             }
-
         }catch (Exception e){
             e.printStackTrace();
         }finally {
@@ -103,5 +112,9 @@ public class ServerConnect {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static void main(String[] args) {
+        ServerConnect.selector();
     }
 }

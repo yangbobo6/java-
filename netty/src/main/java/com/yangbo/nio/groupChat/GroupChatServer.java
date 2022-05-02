@@ -31,8 +31,7 @@ public class GroupChatServer {
             listenChannel.configureBlocking(false);
             //将通道注册到选择器里面
             listenChannel.register(selector, SelectionKey.OP_ACCEPT);
-
-
+            
         }catch (IOException e){
             e.printStackTrace();
         }

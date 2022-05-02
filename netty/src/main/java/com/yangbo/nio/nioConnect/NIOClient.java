@@ -22,6 +22,7 @@ public class NIOClient {
         //发送数据到，将buffer数据写入到channel
         socketChannel.write(buffer);
         System.in.read();
+        
 
     }
 }
